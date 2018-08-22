@@ -11,24 +11,25 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: path.join(__dirname, '../dist')
+        contentBase: path.join(__dirname, '../dist'),
+        historyApiFallback: true
     },
     module: {
         rules: [{
-            test: /\.js$/,
+            test: /\.js[x]?$/,
             use: ['babel-loader?cacheDirectory=true'],
             include: path.join(__dirname, '../src')
         },{
             test: /\.css$/,
             use: ['style-loader','css-loader','postcss-loader'],
-            include: path.join(__dirname, '../src')
+            
         },
         {
             test: /\.less$/,
             use:[ 'style-loader',
            	 {loader: 'css-loader',options:{importLoaders:1}}, 
              'less-loader'],
-            include: path.join(__dirname, '../src')
+           
         }]
     },
     plugins:[new HtmlWebpackPlugin({

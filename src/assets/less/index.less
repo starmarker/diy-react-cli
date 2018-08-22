@@ -1,11 +1,13 @@
 @import './basic.less';
 
-.success,.primary{
-    color:#fff;
-}
-.success{
-    background-color: @success-color;
-}
-.primary{
-    background-color: @primary-color;
+.layout{
+    .logo{
+        width:200px;
+        height:50px;
+        float:left;
+    }
+    &>ul{
+        width:fill-available;
+        float:left;
+    }
 }
