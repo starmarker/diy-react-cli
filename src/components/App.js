@@ -11,7 +11,9 @@ const Element=(props)=>(
    <Router>
     <Layout className="layout">
       <Header>
-        <div className="logo" />
+        <div className="logo">
+          <img src={require("@/assets/img/logo.jpg")} />
+        </div>
         <Menu
           theme="dark"
           mode="horizontal"
