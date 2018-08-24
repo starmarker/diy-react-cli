@@ -77,7 +77,9 @@ module.exports = {
     resolve:{
         alias: {
             "@":path.join(__dirname, '../src/'),
-            "@IMG":path.join(__dirname, '../src/assets/img')
+            "@IMG":path.join(__dirname, '../src/assets/img'),
+            actions: path.join(__dirname, '../src/redux/actions'),
+            reducers: path.join(__dirname, '../src/redux/reducers'),
         }
     }
 
