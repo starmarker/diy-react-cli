@@ -8,17 +8,13 @@ module.exports = {
     /*入口*/
     entry: {
         app:path.join(__dirname, '../src/index.js'),
-        vendors:['react','react-dom','antd']
+        // vendors:['react','react-dom','antd']
         },
     
     /*输出到dist文件夹，输出文件名字为bundle.js*/
     output: {
         path: path.join(__dirname, '../dist'),
         filename: '[name][hash:5].js'
-    },
-    devServer: {
-        contentBase: path.join(__dirname, '../src'),
-        historyApiFallback: true,
     },
     module: {
         rules: [{
@@ -67,24 +63,8 @@ module.exports = {
     },
     optimization:{
         splitChunks:{
-            chunks: "all",
-            // minSize:30000,
-            // maxSize:200000,
-            // name:'app',
-            // names:['react','react-dom','antd'],
-            // cacheGroups: {
-            //     // vendors: {
-            //     //     test: /[\\/]node_modules[\\/]/,
-            //     //     name:'vendors',
-            //     //     chunks:'all'
-            //     // },
-            //     default: {
-            //         minChunks: 2,
-            //         priority: -20,
-            //         reuseExistingChunk: true,
-            //         children:false
-            //     }
-            // }
+            chunks: "initial",
+            maxSize:400000
         }
     },
     plugins:[new HtmlWebpackPlugin({
@@ -94,7 +74,6 @@ module.exports = {
     }),
     extractCSS,extractLESS
     ],
-    devtool: 'inline-source-map',
     resolve:{
         alias: {
             "@":path.join(__dirname, '../src/'),
