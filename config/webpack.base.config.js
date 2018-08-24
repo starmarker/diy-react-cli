@@ -8,13 +8,14 @@ module.exports = {
     /*入口*/
     entry: {
         app:path.join(__dirname, '../src/index.js'),
-        // vendors:['react','react-dom','antd']
+        vendors:['react','react-dom','antd','redux','react-redux']
         },
     
     /*输出到dist文件夹，输出文件名字为bundle.js*/
     output: {
         path: path.join(__dirname, '../dist'),
-        filename: '[name][hash:5].js'
+        filename: '[name].[hash:5].js',
+        chunkFilename: '[name].[chunkhash].js'
     },
     module: {
         rules: [{
@@ -64,7 +65,8 @@ module.exports = {
     optimization:{
         splitChunks:{
             chunks: "initial",
-            maxSize:400000
+            maxSize:400000,
+            name:'vendors'
         }
     },
     plugins:[new HtmlWebpackPlugin({
