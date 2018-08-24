@@ -1,15 +1,20 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const Ex = require('extract-text-webpack-plugin')
+const extractCSS = new Ex('[name]-one.css');
+const extractLESS = new Ex('[name]-two.css');
 module.exports = {
  
     /*入口*/
-    entry: [path.join(__dirname, '../src/index.js')],
+    entry: {
+        app:path.join(__dirname, '../src/index.js'),
+        vendors:['react','react-dom','antd']
+        },
     
     /*输出到dist文件夹，输出文件名字为bundle.js*/
     output: {
         path: path.join(__dirname, '../dist'),
-        filename: 'bundle.js'
+        filename: '[name][hash:5].js'
     },
     devServer: {
         contentBase: path.join(__dirname, '../src'),
@@ -21,14 +26,17 @@ module.exports = {
             use: ['babel-loader?cacheDirectory=true'],
         },{
             test: /\.css$/,
-            use: ['style-loader','css-loader','postcss-loader'],
-            
+            use: extractCSS.extract({
+                fallback:'style-loader',
+                use:['css-loader','postcss-loader']
+            })            
         },
         {
             test: /\.less$/,
-            use:[ 'style-loader',
-           	 {loader: 'css-loader',options:{importLoaders:1}}, 
-             'less-loader'],
+            use:extractLESS.extract({
+                fallback:'style-loader',
+                use:[{loader: 'css-loader',options:{importLoaders:1}},'less-loader']
+            })
            
         },
         {
@@ -57,11 +65,35 @@ module.exports = {
         }
     ]
     },
+    optimization:{
+        splitChunks:{
+            chunks: "all",
+            // minSize:30000,
+            // maxSize:200000,
+            // name:'app',
+            // names:['react','react-dom','antd'],
+            // cacheGroups: {
+            //     // vendors: {
+            //     //     test: /[\\/]node_modules[\\/]/,
+            //     //     name:'vendors',
+            //     //     chunks:'all'
+            //     // },
+            //     default: {
+            //         minChunks: 2,
+            //         priority: -20,
+            //         reuseExistingChunk: true,
+            //         children:false
+            //     }
+            // }
+        }
+    },
     plugins:[new HtmlWebpackPlugin({
         title:'react测试',
         template:'./src/index.html',
         filename:'./index.html'
-    })],
+    }),
+    extractCSS,extractLESS
+    ],
     devtool: 'inline-source-map',
     resolve:{
         alias: {
