@@ -65,8 +65,9 @@ module.exports = {
     optimization:{
         splitChunks:{
             chunks: "initial",
+            name:true,
             maxSize:400000,
-            name:'vendors'
+            // minSize:100000,           
         }
     },
     plugins:[new HtmlWebpackPlugin({

@@ -30,9 +30,9 @@ import {connect} from 'react-redux';
                 test文字样式测试{this.props.name}
                 计数器：{this.props.counter.count}
                 </div>
-                <Button type="primary" onClick={() => this.props.increment()}>自增</Button>
-                <Button type="default" onClick={() => this.props.decrement()}>减少</Button>
-                <Button type="danger" onClick={() => this.props.reset()}>重置</Button>
+                <Button type="primary" onClick={() => this.props.increment()}>自增1</Button>
+                <Button type="default" onClick={() => this.props.decrement()}>减少1</Button>
+                <Button type="danger" onClick={() => this.props.reset()}>重置0</Button>
                 <img src={require('@IMG/content.jpg')} style={{width:'100%'}}/>
             </div>
         )
