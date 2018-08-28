@@ -21,6 +21,9 @@ import {connect} from 'react-redux';
     //     //     count:this.state.count+2
     //     // });
     // }
+    componentWillMount(){
+        console.log(this.props)
+    }
     render() {
         // const IMG=resolve('IMG');
         return (

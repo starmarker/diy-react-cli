@@ -1,21 +1,25 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Ex = require('extract-text-webpack-plugin')
-const extractCSS = new Ex('[name]-one.css');
-const extractLESS = new Ex('[name]-two.css');
+const extractCSS = new Ex('css/[name]-one.css');
+const extractLESS = new Ex('css/[name]-two.css');
 module.exports = {
  
     /*入口*/
     entry: {
         app:path.join(__dirname, '../src/index.js'),
-        vendors:['react','react-dom','antd','redux','react-redux']
+        'react-dom':'react-dom',
+        react:'react',
+        antd:'antd',
+        redux:'redux',
+        'react-redux':'react-redux'
         },
     
     /*输出到dist文件夹，输出文件名字为bundle.js*/
     output: {
         path: path.join(__dirname, '../dist'),
-        filename: '[name].[hash:5].js',
-        chunkFilename: '[name].[chunkhash].js'
+        filename: 'js/[name].min.js',
+        chunkFilename: 'js/[name].[chunkhash].js'
     },
     module: {
         rules: [{
@@ -63,11 +67,10 @@ module.exports = {
     ]
     },
     optimization:{
+        namedChunks:true,
         splitChunks:{
-            chunks: "initial",
-            name:true,
-            maxSize:400000,
-            // minSize:100000,           
+            maxSize:500000,
+            chunks: "initial",           
         }
     },
     plugins:[new HtmlWebpackPlugin({
