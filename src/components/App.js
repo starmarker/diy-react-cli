@@ -3,10 +3,12 @@ import React from "react";
 const { Header, Content, Footer } = Layout;
 import {BrowserRouter as Router,Link,Route} from 'react-router-dom'
 import Hello from './Hello/HelloWorld'
+import JokeList from './Joke/List'
+import MyForm from './Form/Form'
 import '@/assets/less/index.less';
-const Element=(props)=>(
-  <Hello name={props.name}></Hello>
-)
+// const Element=(props)=>(
+//   <Hello name={props.name}></Hello>
+// )
  const App =()=>(
    <Router>
     <Layout className="layout">
@@ -32,9 +34,9 @@ const Element=(props)=>(
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-         <Route path="/" exact component={()=>(<Element name="首页"></Element>)}></Route>
-         <Route path="/about"  component={()=>(<Element name="关于"></Element>)}></Route>
-         <Route path="/content"  component={()=>(<Element name="内容"></Element>)}></Route>
+         <Route path="/" exact component={()=>(<Hello name="首页"></Hello>)}></Route>
+         <Route path="/about"  component={JokeList}></Route>
+         <Route path="/content"  component={()=>(<MyForm />)}></Route>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>

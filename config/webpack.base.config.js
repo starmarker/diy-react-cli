@@ -7,12 +7,14 @@ module.exports = {
  
     /*入口*/
     entry: {
+        babel:"@babel/polyfill",
         app:path.join(__dirname, '../src/index.js'),
         'react-dom':'react-dom',
         react:'react',
         antd:'antd',
         redux:'redux',
-        'react-redux':'react-redux'
+        'react-redux':'react-redux',
+        "react-router-dom":"react-router-dom"
         },
     
     /*输出到dist文件夹，输出文件名字为bundle.js*/
