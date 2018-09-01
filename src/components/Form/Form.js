@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import ReactDom from 'react-dom';
-// import Axios from "axios";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import "../../assets/css/test.css";
 const FormItem = Form.Item;
