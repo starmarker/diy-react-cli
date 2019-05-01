@@ -4,12 +4,16 @@ import '@/assets/less/index.less';
 import {Button} from 'antd';
 import {increment,decrement,reset} from 'actions/counter';
 import {connect} from 'react-redux';
+import {ModalForm as DialogForm}  from '../Form/Dialog'
 // import {hot} from 'react-hot-loader'
  class Hello extends Component {
     constructor(props){
-        super();
+        super(props);
         this.abc=props.match ;
-        this.state={count:0};
+        this.state={count:0,
+            visible:false,
+            confirmLoading:false,
+        };
         // this.handlerClick.bind(this)
         
     }
@@ -21,11 +25,37 @@ import {connect} from 'react-redux';
     //     //     count:this.state.count+2
     //     // });
     // }
+    showModal=()=>{
+        console.log('打开对话框')
+        this.setState({
+            visible:true
+        })
+    }
+    handleCancel=()=>{
+        this.setState({
+            visible:false
+        })
+    }
+    handleOk=()=>{
+        console.log("点击确定")
+        this.setState({
+            confirmLoading:true,
+        });
+        setTimeout(()=>{
+            this.setState({
+                confirmLoading:false,
+                visible:false,
+            })
+        },2000);
+    }
     componentWillMount(){
         console.log(this.props)
     }
     render() {
         // const IMG=resolve('IMG');
+        const submit=value=>{
+            console.log(value)
+        }
         return (
             <div>
                 Hello,React!这是第一个react项目，继续测试一下
@@ -36,7 +66,9 @@ import {connect} from 'react-redux';
                 <Button type="primary" onClick={() => this.props.increment()}>自增1</Button>
                 <Button type="default" onClick={() => this.props.decrement()}>减少1</Button>
                 <Button type="danger" onClick={() => this.props.reset()}>重置0</Button>
-                <img src={require('@IMG/content.jpg')} style={{width:'100%'}}/>
+                <Button type="success" onClick={this.showModal}>打开对话框</Button>
+                <DialogForm title="测试标题" onSub={submit} visible={this.state.visible} confirmLoading={this.state.confirmLoading} onOk={this.handleOk} onCancel={this.handleCancel}/> 
+                {/* <img src={require('@IMG/content.jpg')} style={{width:'100%'}}/> */}
             </div>
         )
     }
