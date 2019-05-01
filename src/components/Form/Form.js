@@ -10,9 +10,11 @@ class NormalLoginForm extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         this.props.onSub(values);
+        console.log(this.props.form)
       }
     });
   };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
